@@ -1,0 +1,447 @@
+{
+  "cities": [
+    {
+      "id": "delhi",
+      "name": "Delhi",
+      "lat": 28.6139,
+      "lon": 77.209,
+      "timezone": "Asia/Kolkata",
+      "zones": [
+        {
+          "id": "connaught-place",
+          "name": "Connaught Place",
+          "lat": 28.6315,
+          "lon": 77.2167,
+          "type": "commercial"
+        },
+        {
+          "id": "rohini",
+          "name": "Rohini",
+          "lat": 28.7495,
+          "lon": 77.0678,
+          "type": "residential"
+        },
+        {
+          "id": "anand-vihar",
+          "name": "Anand Vihar",
+          "lat": 28.6462,
+          "lon": 77.3153,
+          "type": "transport"
+        },
+        {
+          "id": "dwarka",
+          "name": "Dwarka",
+          "lat": 28.5921,
+          "lon": 77.046,
+          "type": "residential"
+        },
+        {
+          "id": "okhla",
+          "name": "Okhla",
+          "lat": 28.5355,
+          "lon": 77.273,
+          "type": "industrial"
+        },
+        {
+          "id": "lodhi-road",
+          "name": "Lodhi Road",
+          "lat": 28.5908,
+          "lon": 77.2225,
+          "type": "green"
+        },
+        {
+          "id": "wazirpur",
+          "name": "Wazirpur",
+          "lat": 28.7018,
+          "lon": 77.166,
+          "type": "industrial"
+        },
+        {
+          "id": "punjabi-bagh",
+          "name": "Punjabi Bagh",
+          "lat": 28.6726,
+          "lon": 77.1302,
+          "type": "residential"
+        }
+      ]
+    },
+    {
+      "id": "mumbai",
+      "name": "Mumbai",
+      "lat": 19.076,
+      "lon": 72.8777,
+      "timezone": "Asia/Kolkata",
+      "zones": [
+        {
+          "id": "bandra",
+          "name": "Bandra",
+          "lat": 19.0596,
+          "lon": 72.8295,
+          "type": "residential"
+        },
+        {
+          "id": "andheri",
+          "name": "Andheri",
+          "lat": 19.1136,
+          "lon": 72.8697,
+          "type": "commercial"
+        },
+        {
+          "id": "worli",
+          "name": "Worli",
+          "lat": 19.0176,
+          "lon": 72.8162,
+          "type": "commercial"
+        },
+        {
+          "id": "chembur",
+          "name": "Chembur",
+          "lat": 19.0522,
+          "lon": 72.8993,
+          "type": "industrial"
+        },
+        {
+          "id": "borivali",
+          "name": "Borivali",
+          "lat": 19.2307,
+          "lon": 72.8567,
+          "type": "residential"
+        },
+        {
+          "id": "colaba",
+          "name": "Colaba",
+          "lat": 18.9067,
+          "lon": 72.8147,
+          "type": "commercial"
+        },
+        {
+          "id": "powai",
+          "name": "Powai",
+          "lat": 19.1176,
+          "lon": 72.906,
+          "type": "green"
+        },
+        {
+          "id": "dharavi",
+          "name": "Dharavi",
+          "lat": 19.04,
+          "lon": 72.854,
+          "type": "residential"
+        }
+      ]
+    },
+    {
+      "id": "bengaluru",
+      "name": "Bengaluru",
+      "lat": 12.9716,
+      "lon": 77.5946,
+      "timezone": "Asia/Kolkata",
+      "zones": [
+        {
+          "id": "koramangala",
+          "name": "Koramangala",
+          "lat": 12.9352,
+          "lon": 77.6245,
+          "type": "commercial"
+        },
+        {
+          "id": "whitefield",
+          "name": "Whitefield",
+          "lat": 12.9698,
+          "lon": 77.7499,
+          "type": "tech"
+        },
+        {
+          "id": "hebbal",
+          "name": "Hebbal",
+          "lat": 13.0358,
+          "lon": 77.597,
+          "type": "residential"
+        },
+        {
+          "id": "hsr-layout",
+          "name": "HSR Layout",
+          "lat": 12.9081,
+          "lon": 77.6476,
+          "type": "residential"
+        },
+        {
+          "id": "peenya",
+          "name": "Peenya",
+          "lat": 13.0297,
+          "lon": 77.5192,
+          "type": "industrial"
+        },
+        {
+          "id": "indiranagar",
+          "name": "Indiranagar",
+          "lat": 12.9784,
+          "lon": 77.6408,
+          "type": "commercial"
+        },
+        {
+          "id": "electronic-city",
+          "name": "Electronic City",
+          "lat": 12.8399,
+          "lon": 77.677,
+          "type": "tech"
+        },
+        {
+          "id": "malleshwaram",
+          "name": "Malleshwaram",
+          "lat": 13.0035,
+          "lon": 77.5711,
+          "type": "residential"
+        }
+      ]
+    },
+    {
+      "id": "kolkata",
+      "name": "Kolkata",
+      "lat": 22.5726,
+      "lon": 88.3639,
+      "timezone": "Asia/Kolkata",
+      "zones": [
+        {
+          "id": "salt-lake",
+          "name": "Salt Lake",
+          "lat": 22.5775,
+          "lon": 88.4177,
+          "type": "residential"
+        },
+        {
+          "id": "howrah",
+          "name": "Howrah",
+          "lat": 22.5958,
+          "lon": 88.2636,
+          "type": "industrial"
+        },
+        {
+          "id": "park-street",
+          "name": "Park Street",
+          "lat": 22.5526,
+          "lon": 88.3502,
+          "type": "commercial"
+        },
+        {
+          "id": "dum-dum",
+          "name": "Dum Dum",
+          "lat": 22.6411,
+          "lon": 88.3976,
+          "type": "transport"
+        },
+        {
+          "id": "jadavpur",
+          "name": "Jadavpur",
+          "lat": 22.4997,
+          "lon": 88.3714,
+          "type": "residential"
+        },
+        {
+          "id": "new-town",
+          "name": "New Town",
+          "lat": 22.5876,
+          "lon": 88.462,
+          "type": "tech"
+        }
+      ]
+    },
+    {
+      "id": "hyderabad",
+      "name": "Hyderabad",
+      "lat": 17.385,
+      "lon": 78.4867,
+      "timezone": "Asia/Kolkata",
+      "zones": [
+        {
+          "id": "hitech-city",
+          "name": "HiTech City",
+          "lat": 17.4435,
+          "lon": 78.3772,
+          "type": "tech"
+        },
+        {
+          "id": "secunderabad",
+          "name": "Secunderabad",
+          "lat": 17.4399,
+          "lon": 78.4983,
+          "type": "commercial"
+        },
+        {
+          "id": "uppal",
+          "name": "Uppal",
+          "lat": 17.4012,
+          "lon": 78.5597,
+          "type": "industrial"
+        },
+        {
+          "id": "jubilee-hills",
+          "name": "Jubilee Hills",
+          "lat": 17.425,
+          "lon": 78.4074,
+          "type": "residential"
+        },
+        {
+          "id": "old-city",
+          "name": "Old City",
+          "lat": 17.3553,
+          "lon": 78.4739,
+          "type": "residential"
+        },
+        {
+          "id": "gachibowli",
+          "name": "Gachibowli",
+          "lat": 17.4401,
+          "lon": 78.3489,
+          "type": "tech"
+        }
+      ]
+    },
+    {
+      "id": "chennai",
+      "name": "Chennai",
+      "lat": 13.0827,
+      "lon": 80.2707,
+      "timezone": "Asia/Kolkata",
+      "zones": [
+        {
+          "id": "anna-nagar",
+          "name": "Anna Nagar",
+          "lat": 13.085,
+          "lon": 80.2101,
+          "type": "residential"
+        },
+        {
+          "id": "t-nagar",
+          "name": "T. Nagar",
+          "lat": 13.0418,
+          "lon": 80.2341,
+          "type": "commercial"
+        },
+        {
+          "id": "ambattur",
+          "name": "Ambattur",
+          "lat": 13.1143,
+          "lon": 80.1548,
+          "type": "industrial"
+        },
+        {
+          "id": "adyar",
+          "name": "Adyar",
+          "lat": 13.0012,
+          "lon": 80.2565,
+          "type": "residential"
+        },
+        {
+          "id": "velachery",
+          "name": "Velachery",
+          "lat": 12.9815,
+          "lon": 80.218,
+          "type": "residential"
+        },
+        {
+          "id": "omr",
+          "name": "OMR (IT Corridor)",
+          "lat": 12.901,
+          "lon": 80.2279,
+          "type": "tech"
+        }
+      ]
+    },
+    {
+      "id": "pune",
+      "name": "Pune",
+      "lat": 18.5204,
+      "lon": 73.8567,
+      "timezone": "Asia/Kolkata",
+      "zones": [
+        {
+          "id": "shivajinagar",
+          "name": "Shivajinagar",
+          "lat": 18.5308,
+          "lon": 73.8474,
+          "type": "commercial"
+        },
+        {
+          "id": "hinjewadi",
+          "name": "Hinjewadi",
+          "lat": 18.5912,
+          "lon": 73.7389,
+          "type": "tech"
+        },
+        {
+          "id": "pimpri",
+          "name": "Pimpri",
+          "lat": 18.6298,
+          "lon": 73.7997,
+          "type": "industrial"
+        },
+        {
+          "id": "kothrud",
+          "name": "Kothrud",
+          "lat": 18.5074,
+          "lon": 73.8077,
+          "type": "residential"
+        },
+        {
+          "id": "hadapsar",
+          "name": "Hadapsar",
+          "lat": 18.5018,
+          "lon": 73.9252,
+          "type": "tech"
+        },
+        {
+          "id": "katraj",
+          "name": "Katraj",
+          "lat": 18.453,
+          "lon": 73.867,
+          "type": "residential"
+        }
+      ]
+    },
+    {
+      "id": "ahmedabad",
+      "name": "Ahmedabad",
+      "lat": 23.0225,
+      "lon": 72.5714,
+      "timezone": "Asia/Kolkata",
+      "zones": [
+        {
+          "id": "navrangpura",
+          "name": "Navrangpura",
+          "lat": 23.0395,
+          "lon": 72.56,
+          "type": "commercial"
+        },
+        {
+          "id": "vatva",
+          "name": "Vatva",
+          "lat": 22.9615,
+          "lon": 72.6415,
+          "type": "industrial"
+        },
+        {
+          "id": "sg-highway",
+          "name": "SG Highway",
+          "lat": 23.0395,
+          "lon": 72.5069,
+          "type": "commercial"
+        },
+        {
+          "id": "bopal",
+          "name": "Bopal",
+          "lat": 23.0305,
+          "lon": 72.4691,
+          "type": "residential"
+        },
+        {
+          "id": "maninagar",
+          "name": "Maninagar",
+          "lat": 22.9957,
+          "lon": 72.6028,
+          "type": "residential"
+        }
+      ]
+    }
+  ]
+}

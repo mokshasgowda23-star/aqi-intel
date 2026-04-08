@@ -1,0 +1,330 @@
+{
+  "badges": [
+    {
+      "id": "masked-7",
+      "name": "Masked Up",
+      "desc": "Wore a mask 7 days straight on bad air days",
+      "icon": "\ud83d\ude37",
+      "tier": "silver",
+      "category": "health",
+      "days_required": 7,
+      "points": 150,
+      "unlock_condition": "masked_days >= 7",
+      "share_text": "I've worn a mask 7 days straight to protect myself from air pollution! \ud83d\ude37 #AQIIntel #CleanAir"
+    },
+    {
+      "id": "masked-30",
+      "name": "Mask Champion",
+      "desc": "Wore a mask every bad air day for a full month",
+      "icon": "\ud83d\udee1\ufe0f",
+      "tier": "gold",
+      "category": "health",
+      "days_required": 30,
+      "points": 500,
+      "unlock_condition": "masked_days >= 30",
+      "share_text": "30 days of masking up on bad air days. Lungs protected! \ud83d\udee1\ufe0f #AQIIntel"
+    },
+    {
+      "id": "stayed-in-red",
+      "name": "Red Day Survivor",
+      "desc": "Stayed indoors on a day with Very Poor or Severe AQI",
+      "icon": "\ud83c\udfe0",
+      "tier": "bronze",
+      "category": "awareness",
+      "days_required": 1,
+      "points": 75,
+      "unlock_condition": "indoor_days >= 1",
+      "share_text": "I stayed indoors on a red AQI day and protected my lungs! \ud83c\udfe0 #AQIIntel"
+    },
+    {
+      "id": "stayed-in-red-7",
+      "name": "Indoor Guardian",
+      "desc": "Stayed indoors on 7 bad air days",
+      "icon": "\ud83c\udfe1",
+      "tier": "silver",
+      "category": "awareness",
+      "days_required": 7,
+      "points": 250,
+      "unlock_condition": "indoor_days >= 7",
+      "share_text": "7 times I chose my health over going out on bad air days! \ud83c\udfe1 #AQIIntel"
+    },
+    {
+      "id": "streak-7",
+      "name": "Week Warrior",
+      "desc": "Checked AQI 7 days in a row",
+      "icon": "\u2b50",
+      "tier": "bronze",
+      "category": "streak",
+      "days_required": 7,
+      "points": 100,
+      "unlock_condition": "streak >= 7",
+      "share_text": "7-day AQI check-in streak! Staying air-aware every day. \u2b50 #AQIIntel"
+    },
+    {
+      "id": "streak-14",
+      "name": "Fortnight Fighter",
+      "desc": "Checked AQI 14 days in a row",
+      "icon": "\ud83d\udd25",
+      "tier": "silver",
+      "category": "streak",
+      "days_required": 14,
+      "points": 200,
+      "unlock_condition": "streak >= 14",
+      "share_text": "14-day streak! Two weeks of tracking my city's air quality. \ud83d\udd25 #AQIIntel"
+    },
+    {
+      "id": "streak-30",
+      "name": "Air Aware",
+      "desc": "Checked AQI 30 days in a row",
+      "icon": "\ud83d\udc8e",
+      "tier": "gold",
+      "category": "streak",
+      "days_required": 30,
+      "points": 500,
+      "unlock_condition": "streak >= 30",
+      "share_text": "30-day AQI streak! I'm officially air-aware. \ud83d\udc8e #AQIIntel"
+    },
+    {
+      "id": "streak-60",
+      "name": "Habit Formed",
+      "desc": "Checked AQI 60 days in a row \u2014 it's a lifestyle now",
+      "icon": "\ud83c\udfc6",
+      "tier": "platinum",
+      "category": "streak",
+      "days_required": 60,
+      "points": 1000,
+      "unlock_condition": "streak >= 60",
+      "share_text": "60-day AQI streak. Clean air awareness is now part of my daily life! \ud83c\udfc6 #AQIIntel"
+    },
+    {
+      "id": "early-bird",
+      "name": "Early Bird",
+      "desc": "Went outside during the cleanest hour of the day, 5 times",
+      "icon": "\ud83c\udf05",
+      "tier": "bronze",
+      "category": "smart_living",
+      "days_required": 5,
+      "points": 120,
+      "unlock_condition": "check_count >= 5",
+      "share_text": "I time my outdoor activities to the cleanest air windows of the day! \ud83c\udf05 #AQIIntel"
+    },
+    {
+      "id": "school-guard",
+      "name": "School Guard",
+      "desc": "Checked school mode 15 times \u2014 great parent or educator!",
+      "icon": "\ud83c\udfeb",
+      "tier": "silver",
+      "category": "community",
+      "days_required": 15,
+      "points": 200,
+      "unlock_condition": "school_checks >= 15",
+      "share_text": "I check AQI school mode every day to keep kids safe outdoors! \ud83c\udfeb #AQIIntel"
+    },
+    {
+      "id": "community-star",
+      "name": "Community Star",
+      "desc": "Submitted 5 local air quality reports",
+      "icon": "\u2b50",
+      "tier": "silver",
+      "category": "community",
+      "days_required": 5,
+      "points": 175,
+      "unlock_condition": "reports_submitted >= 5",
+      "share_text": "I've reported local air quality conditions 5 times to help my community! \u2b50 #AQIIntel"
+    },
+    {
+      "id": "indoor-hero",
+      "name": "Indoor Hero",
+      "desc": "Used the indoor venue finder on 10 bad air days",
+      "icon": "\ud83c\udfcb\ufe0f",
+      "tier": "silver",
+      "category": "smart_living",
+      "days_required": 10,
+      "points": 180,
+      "unlock_condition": "indoor_venue_checks >= 10",
+      "share_text": "I find indoor alternatives when air quality is bad \u2014 gym, mall, or caf\u00e9! \ud83c\udfcb\ufe0f #AQIIntel"
+    },
+    {
+      "id": "first-checkin",
+      "name": "Day One",
+      "desc": "Completed your very first daily check-in",
+      "icon": "\ud83c\udf31",
+      "tier": "bronze",
+      "category": "streak",
+      "days_required": 1,
+      "points": 25,
+      "unlock_condition": "check_count >= 1",
+      "share_text": "Started my air quality journey today! \ud83c\udf31 #AQIIntel"
+    },
+    {
+      "id": "good-week",
+      "name": "Lucky Week",
+      "desc": "Your city had 7 consecutive good air days",
+      "icon": "\u2728",
+      "tier": "gold",
+      "category": "awareness",
+      "days_required": 7,
+      "points": 300,
+      "unlock_condition": "city_good_streak >= 7",
+      "share_text": "My city had 7 clean air days in a row! \u2728 #AQIIntel #CleanAir"
+    },
+    {
+      "id": "alert-setter",
+      "name": "Alert Setter",
+      "desc": "Set your first AQI threshold alert",
+      "icon": "\ud83d\udd14",
+      "tier": "bronze",
+      "category": "awareness",
+      "days_required": 1,
+      "points": 50,
+      "unlock_condition": "alerts_set >= 1",
+      "share_text": "I've set up AQI alerts to know when air quality gets dangerous! \ud83d\udd14 #AQIIntel"
+    },
+    {
+      "id": "night-owl",
+      "name": "Night Owl",
+      "desc": "Checked AQI after 10 PM, 5 times \u2014 planning for tomorrow!",
+      "icon": "\ud83e\udd89",
+      "tier": "bronze",
+      "category": "smart_living",
+      "days_required": 5,
+      "points": 80,
+      "unlock_condition": "night_checks >= 5",
+      "share_text": "I check tomorrow's AQI at night so I can plan ahead! \ud83e\udd89 #AQIIntel"
+    },
+    {
+      "id": "dog-parent",
+      "name": "Responsible Dog Parent",
+      "desc": "Checked dog walking safety 10 times before walks",
+      "icon": "\ud83d\udc15",
+      "tier": "silver",
+      "category": "smart_living",
+      "days_required": 10,
+      "points": 150,
+      "unlock_condition": "dog_walk_checks >= 10",
+      "share_text": "I check AQI before every dog walk \u2014 my pup's lungs matter! \ud83d\udc15 #AQIIntel"
+    },
+    {
+      "id": "city-champion",
+      "name": "City Champion",
+      "desc": "Used all 8 features of AQI Intel in one week",
+      "icon": "\ud83c\udf96\ufe0f",
+      "tier": "gold",
+      "category": "community",
+      "days_required": 7,
+      "points": 400,
+      "unlock_condition": "features_used >= 8",
+      "share_text": "I use every feature of AQI Intel \u2014 from heatmaps to school mode! \ud83c\udf96\ufe0f #AQIIntel"
+    }
+  ],
+  "tiers": {
+    "bronze": {
+      "label": "Bronze",
+      "color": "#cd7f32",
+      "bg": "#fdf3e7",
+      "border": "#cd7f3240"
+    },
+    "silver": {
+      "label": "Silver",
+      "color": "#9e9e9e",
+      "bg": "#f5f5f5",
+      "border": "#9e9e9e40"
+    },
+    "gold": {
+      "label": "Gold",
+      "color": "#ffc107",
+      "bg": "#fffde7",
+      "border": "#ffc10740"
+    },
+    "platinum": {
+      "label": "Platinum",
+      "color": "#7b68ee",
+      "bg": "#f0eeff",
+      "border": "#7b68ee40"
+    }
+  },
+  "categories": {
+    "health": {
+      "label": "Health",
+      "icon": "\ud83d\udc8a"
+    },
+    "streak": {
+      "label": "Streaks",
+      "icon": "\ud83d\udd25"
+    },
+    "awareness": {
+      "label": "Awareness",
+      "icon": "\ud83c\udf0d"
+    },
+    "smart_living": {
+      "label": "Smart Living",
+      "icon": "\ud83e\udde0"
+    },
+    "community": {
+      "label": "Community",
+      "icon": "\ud83e\udd1d"
+    }
+  },
+  "points_to_level": [
+    {
+      "level": 1,
+      "title": "Newcomer",
+      "icon": "\ud83d\udc4b",
+      "min_points": 0
+    },
+    {
+      "level": 2,
+      "title": "Air Curious",
+      "icon": "\ud83c\udf31",
+      "min_points": 100
+    },
+    {
+      "level": 3,
+      "title": "Smog Watcher",
+      "icon": "\ud83d\udc41\ufe0f",
+      "min_points": 300
+    },
+    {
+      "level": 4,
+      "title": "Mask Carrier",
+      "icon": "\ud83d\ude37",
+      "min_points": 600
+    },
+    {
+      "level": 5,
+      "title": "Streak Keeper",
+      "icon": "\ud83d\udd25",
+      "min_points": 1000
+    },
+    {
+      "level": 6,
+      "title": "Clean Air Advocate",
+      "icon": "\ud83c\udf3f",
+      "min_points": 1500
+    },
+    {
+      "level": 7,
+      "title": "AQI Expert",
+      "icon": "\ud83c\udfc5",
+      "min_points": 2200
+    },
+    {
+      "level": 8,
+      "title": "City Guardian",
+      "icon": "\ud83d\udee1\ufe0f",
+      "min_points": 3000
+    },
+    {
+      "level": 9,
+      "title": "Air Champion",
+      "icon": "\ud83c\udfc6",
+      "min_points": 4000
+    },
+    {
+      "level": 10,
+      "title": "Breathe Legend",
+      "icon": "\ud83d\udc8e",
+      "min_points": 5500
+    }
+  ]
+}

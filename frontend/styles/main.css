@@ -1,0 +1,457 @@
+/* frontend/styles/main.css */
+/* AQI Intelligence — Editorial + Data-rich aesthetic */
+/* Tone: Clean newspaper meets air quality science. Burnt oranges, slates, clean whites. */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg:         #f5f3ef;
+  --bg-card:    #ffffff;
+  --bg-dark:    #1a1a1a;
+  --text:       #1c1c1c;
+  --text-muted: #6b6b6b;
+  --text-light: #9e9e9e;
+  --border:     #e0ddd8;
+  --border-dark:#c8c4bc;
+
+  /* AQI palette — India NAQI */
+  --good:        #00b050;
+  --satisfactory:#7ab648;
+  --moderate:    #e8a000;
+  --poor:        #e05a00;
+  --very-poor:   #cc0000;
+  --severe:      #660000;
+
+  /* Accent */
+  --accent:      #e05a00;
+  --accent-light:#fff3e8;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    'DM Mono', 'Courier New', monospace;
+
+  /* Spacing */
+  --radius:  10px;
+  --radius-lg: 16px;
+  --shadow:  0 2px 12px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Layout ── */
+.app-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: 56px 1fr;
+  min-height: 100vh;
+}
+
+.topbar {
+  grid-column: 1 / -1;
+  background: var(--bg-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.topbar-logo span { color: var(--accent); }
+
+.city-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.city-selector select {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.city-selector select option { color: #000; background: #fff; }
+
+/* ── Sidebar ── */
+.sidebar {
+  background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  overflow-y: auto;
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 56px);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 20px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-left: 3px solid transparent;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+.nav-item.active {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+
+.nav-item .icon { font-size: 1.1rem; width: 20px; text-align: center; }
+
+.nav-section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  padding: 16px 20px 6px;
+}
+
+/* ── Main Content ── */
+.main-content {
+  overflow-y: auto;
+  padding: 28px;
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── Cards ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+/* ── AQI Value Display ── */
+.aqi-number {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.aqi-category {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  color: #fff;
+  margin-top: 6px;
+}
+
+/* ── Badges ── */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+/* ── Loading States ── */
+.skeleton {
+  background: linear-gradient(90deg, #f0ede8 25%, #e5e1db 50%, #f0ede8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Forecast Bar ── */
+.forecast-bar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.forecast-hour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 58px;
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 8px 6px;
+  border: 1px solid var(--border);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.forecast-hour:hover { transform: translateY(-2px); }
+.forecast-hour.best { border: 2px solid var(--good); }
+
+.forecast-hour .hour-label { font-size: 0.7rem; color: var(--text-muted); font-weight: 500; }
+.forecast-hour .hour-aqi   { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 500; }
+.forecast-hour .hour-bar   { width: 28px; height: 4px; border-radius: 2px; }
+
+/* ── Calendar Grid ── */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.1s;
+}
+
+.cal-day:hover { transform: scale(1.08); }
+.cal-day .day-num { font-size: 0.8rem; font-weight: 600; }
+.cal-day .day-aqi { font-size: 0.65rem; opacity: 0.85; }
+
+/* ── Zone Heatmap ── */
+.zone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.zone-card {
+  border-radius: 10px;
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.zone-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+.zone-name { font-weight: 600; font-size: 0.85rem; color: #fff; }
+.zone-type {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+.zone-aqi-big {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.95);
+  line-height: 1;
+  margin-top: 8px;
+}
+.zone-category { font-size: 0.7rem; color: rgba(255,255,255,0.85); margin-top: 2px; }
+
+/* ── Activity Cards ── */
+.activity-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.activity-icon { font-size: 1.8rem; }
+.activity-label { font-weight: 600; font-size: 0.875rem; }
+.activity-status { font-size: 0.8rem; line-height: 1.4; }
+
+/* ── Streak / Community ── */
+.streak-display {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.streak-number {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--accent);
+}
+.streak-label { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.badge-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.15s;
+}
+
+.badge-card:hover { transform: translateY(-2px); }
+.badge-card.earned { border-color: #ffd700; background: #fffdf0; }
+.badge-card .badge-icon { font-size: 2rem; }
+.badge-card .badge-name { font-size: 0.75rem; font-weight: 600; margin-top: 4px; }
+.badge-card .badge-desc { font-size: 0.68rem; color: var(--text-muted); margin-top: 3px; }
+
+.progress-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+  transition: width 0.5s ease;
+}
+
+/* ── Alert Banner ── */
+.alert-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  border-left: 4px solid;
+  margin-bottom: 16px;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Daily Brief Checklist ── */
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.checklist-item:last-child { border-bottom: none; }
+.check-box {
+  width: 20px; height: 20px;
+  border-radius: 4px;
+  border: 2px solid var(--border-dark);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.checklist-item.done .check-box {
+  background: var(--good);
+  border-color: var(--good);
+  color: #fff;
+}
+.checklist-item.done .check-label { text-decoration: line-through; color: var(--text-muted); }
+.check-label { font-size: 0.875rem; }
+.check-critical .check-box { border-color: var(--poor); }
+
+/* ── Source badge ── */
+.source-badge {
+  font-size: 0.65rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 2px 7px;
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  display: inline-block;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .app-shell { grid-template-columns: 1fr; grid-template-rows: 56px auto 1fr; }
+  .sidebar { position: fixed; left: -240px; top: 56px; height: calc(100vh - 56px); z-index: 200; transition: left 0.25s; }
+  .sidebar.open { left: 0; box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .main-content { padding: 16px; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 3px; }

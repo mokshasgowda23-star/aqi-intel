@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQI Intelligence — India</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌫️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── AQI Intel — Redesigned UI System ── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+
+:root {
+  --cream: #f7f5f0;
+  --white: #ffffff;
+  --ink: #18181b;
+  --ink2: #52525b;
+  --ink3: #a1a1aa;
+  --border: rgba(0,0,0,.07);
+  --border2: rgba(0,0,0,.13);
+  --good: #16a34a; --good-bg: #f0fdf4; --good-ring: #bbf7d0;
+  --sat: #65a30d;  --sat-bg: #f7fee7;
+  --mod: #d97706;  --mod-bg: #fffbeb;  --mod-ring: #fde68a;
+  --poor: #ea580c; --poor-bg: #fff7ed; --poor-ring: #fed7aa;
+  --vpoor: #dc2626;--vpoor-bg: #fef2f2;--vpoor-ring:#fecaca;
+  --severe: #7c2d12;
+  --accent: #e05a00; --accent-light: #fff3e8;
+  --font-display: 'Syne', 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+  --r: 14px; --r2: 10px; --r3: 6px;
+  --shadow: 0 1px 3px rgba(0,0,0,.05), 0 4px 12px rgba(0,0,0,.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Shell layout ── */
+.shell {
+  display: grid;
+  grid-template-columns: 208px 1fr;
+  grid-template-rows: 52px 1fr;
+  min-height: 100vh;
+}
+
+/* ── Topbar ── */
+.topbar {
+  grid-column: 1 / -1;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -.03em;
+  flex-shrink: 0;
+}
+.logo span { color: var(--accent); }
+
+/* ── Search ── */
+.search-wrap { position: relative; flex: 1; max-width: 300px; }
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 40px;
+  padding: 6px 14px;
+  transition: border-color .15s, background .15s;
+}
+.search-box:focus-within {
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.35);
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: .82rem;
+  outline: none;
+  width: 100%;
+}
+.search-input::placeholder { color: rgba(255,255,255,.35); }
+.search-icon { font-size: .85rem; flex-shrink: 0; }
+.search-spinner { font-size: .75rem; animation: spin .8s linear infinite; display: none; }
+.search-clear { background: none; border: none; color: rgba(255,255,255,.4); cursor: pointer; font-size: 1rem; padding: 0 2px; display: none; }
+.search-clear:hover { color: #fff; }
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0; right: 0;
+  min-width: 280px;
+  background: var(--white);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-md);
+  z-index: 300;
+  overflow: hidden;
+  display: none;
+}
+.suggestions.open { display: block; }
+.sug-section {
+  padding: 8px 14px 5px;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+}
+.sug-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background .1s;
+}
+.sug-item:last-child { border-bottom: none; }
+.sug-item:hover, .sug-item.focused { background: var(--accent-light); }
+.sug-name { font-size: .875rem; font-weight: 600; color: var(--ink); }
+.sug-state { font-size: .7rem; color: var(--ink3); margin-top: 1px; }
+.sug-badge { font-size: .6rem; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+.sug-badge.popular { background: #e0f2fe; color: #0369a1; }
+.sug-badge.result  { background: var(--accent-light); color: var(--accent); }
+.sug-no-result { padding: 16px; font-size: .85rem; color: var(--ink3); text-align: center; }
+
+.city-chip {
+  font-size: .72rem;
+  color: rgba(255,255,255,.45);
+  background: rgba(255,255,255,.07);
+  border-radius: 20px;
+  padding: 3px 10px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+.ts-label { font-size: .68rem; color: rgba(255,255,255,.28); flex-shrink: 0; white-space: nowrap; }
+
+/* ── Sidebar ── */
+.sidebar {
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  padding: 16px 0;
+  overflow-y: auto;
+  position: sticky;
+  top: 52px;
+  height: calc(100vh - 52px);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.nav-section {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  padding: 12px 16px 4px;
+}
+
+.nav-div { height: 1px; background: var(--border); margin: 6px 8px; }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px;
+  border-radius: var(--r3);
+  margin: 0 8px;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--ink2);
+  cursor: pointer;
+  transition: all .12s;
+  position: relative;
+}
+.nav-item:hover:not(.active) { background: var(--cream); color: var(--ink); }
+.nav-item.active {
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 600;
+}
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 25%; height: 50%;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 0 2px 2px 0;
+}
+.nav-icon { font-size: .9rem; width: 16px; text-align: center; flex-shrink: 0; }
+.nav-new { font-size: .55rem; font-weight: 700; background: var(--accent); color: #fff; border-radius: 3px; padding: 1px 5px; margin-left: auto; }
+.nav-badge { margin-left: auto; font-size: .6rem; font-weight: 700; background: var(--accent); color: #fff; border-radius: 10px; padding: 1px 6px; }
+
+/* ── Main content ── */
+.content { overflow-y: auto; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+.page { display: none; }
+.page.active { display: flex; flex-direction: column; gap: 14px; }
+
+/* ── Cards ── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.card-sm { padding: 14px; }
+.card-title {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 12px;
+}
+
+/* AQI Hero card (dark) */
+.aqi-hero {
+  background: var(--ink);
+  border-radius: var(--r);
+  padding: 22px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: none;
+}
+.aqi-hero::after {
+  content: '';
+  position: absolute;
+  right: -30px; top: -30px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.025);
+}
+.aqi-label-small {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  margin-bottom: 6px;
+}
+.aqi-num {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+.aqi-pill {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-top: 8px;
+  letter-spacing: .02em;
+}
+.aqi-meta { font-size: .73rem; color: rgba(255,255,255,.35); margin-top: 9px; }
+.src-tag {
+  font-size: .6rem;
+  font-family: var(--font-mono);
+  background: rgba(255,255,255,.08);
+  border-radius: 20px;
+  padding: 2px 8px;
+  color: rgba(255,255,255,.3);
+  display: inline-block;
+  margin-top: 5px;
+}
+
+/* ── Grids ── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+
+/* ── Pollutant card ── */
+.poll-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 12px;
+}
+.poll-name { font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink3); }
+.poll-val { font-size: 1.05rem; font-weight: 600; font-variant-numeric: tabular-nums; margin: 4px 0; }
+.poll-unit { font-size: .62rem; font-weight: 400; color: var(--ink3); }
+.poll-bar { height: 3px; background: var(--border2); border-radius: 2px; overflow: hidden; margin-top: 6px; }
+.poll-fill { height: 100%; border-radius: 2px; transition: width .7s ease; }
+
+/* ── Forecast ── */
+.fc-bar { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+.fc-bar::-webkit-scrollbar { height: 3px; }
+.fc-bar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+.fc-hr {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  min-width: 58px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 9px 6px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all .12s;
+}
+.fc-hr:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.fc-hr.best { background: var(--good-bg); border-color: var(--good-ring); }
+.fc-label { font-size: .6rem; font-weight: 700; color: var(--ink3); text-transform: uppercase; }
+.fc-aqi { font-size: .88rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.fc-strip { width: 28px; height: 3px; border-radius: 2px; }
+.fc-best-tag { font-size: .55rem; font-weight: 700; color: var(--good); }
+
+/* ── Zone card ── */
+.zone-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 10px; }
+.zone-card {
+  border-radius: var(--r2);
+  padding: 16px;
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
+  position: relative;
+  overflow: hidden;
+}
+.zone-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.zone-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,.15), rgba(255,255,255,.03)); pointer-events: none; }
+
+/* ── Calendar ── */
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.cal-cell {
+  aspect-ratio: 1;
+  border-radius: 5px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: transform .1s;
+  font-size: .7rem; font-weight: 600;
+}
+.cal-cell:hover { transform: scale(1.1); z-index: 2; }
+
+/* ── Activity card ── */
+.act-card {
+  border-radius: var(--r2);
+  padding: 14px;
+  border: 1.5px solid var(--border);
+  transition: transform .12s, box-shadow .12s;
+}
+.act-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+/* ── Badge card ── */
+.badge-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 12px;
+  text-align: center;
+  transition: transform .12s;
+  position: relative;
+}
+.badge-card:hover { transform: translateY(-2px); }
+.badge-card.earned { background: #fffef5; border-color: rgba(251,191,36,.35); }
+
+/* ── Venue card ── */
+.venue-card {
+  display: flex; gap: 10px; padding: 11px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  transition: border-color .12s, box-shadow .12s;
+  text-decoration: none; color: inherit;
+}
+.venue-card:hover { border-color: var(--border2); box-shadow: var(--shadow); }
+
+/* ── Checklist ── */
+.chk-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer; user-select: none;
+}
+.chk-item:last-child { border-bottom: none; }
+.chk-box {
+  width: 20px; height: 20px;
+  border-radius: 5px;
+  border: 1.5px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all .15s;
+  font-size: .75rem; color: #fff;
+}
+.chk-item.done .chk-box { background: var(--good); border-color: var(--good); }
+.chk-item.done .chk-label { text-decoration: line-through; color: var(--ink3); }
+
+/* ── Alert bar ── */
+.alert-bar {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--r2);
+  border-left: 3px solid;
+  margin-bottom: 0;
+  animation: slideIn .25s ease;
+}
+@keyframes slideIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── Best time box ── */
+.best-time-box {
+  background: var(--good-bg);
+  border: 1px solid var(--good-ring);
+  border-radius: var(--r2);
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: .82rem;
+  margin-top: 10px;
+}
+.best-time-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--good); flex-shrink: 0; }
+
+/* ── School header ── */
+.school-hdr {
+  border-radius: var(--r);
+  padding: 18px 22px;
+  color: #fff;
+  margin-bottom: 0;
+  display: flex; align-items: center; gap: 16px;
+}
+
+/* ── Progress ── */
+.prog { height: 4px; background: var(--border2); border-radius: 2px; overflow: hidden; margin-top: 7px; }
+.prog-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width .6s ease; }
+
+/* ── Filter buttons ── */
+.filter-btn {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  background: var(--white);
+  font-size: .76rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .12s;
+  color: var(--ink2);
+}
+.filter-btn:hover, .filter-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* ── Skeleton ── */
+.skel {
+  background: linear-gradient(90deg, #eeece8 25%, #e6e4e0 50%, #eeece8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--r2);
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ── Range slider ── */
+input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 5px; border-radius: 3px; outline: none; cursor: pointer;
+  background: linear-gradient(to right, #16a34a 0%, #65a30d 20%, #d97706 40%, #ea580c 60%, #dc2626 80%, #7c2d12 100%);
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--accent);
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(0,0,0,.15);
+}
+
+/* ── Page section headers ── */
+.page-header { margin-bottom: 2px; }
+.page-title { font-family: var(--font-display); font-size: 1.45rem; font-weight: 800; letter-spacing: -.03em; }
+.page-sub { font-size: .8rem; color: var(--ink2); margin-top: 3px; }
+
+/* ── Animations ── */
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .shell { grid-template-columns: 1fr; grid-template-rows: 52px 1fr; }
+  .sidebar { display: none; }
+  .g2, .g3, .g4 { grid-template-columns: 1fr; }
+  .content { padding: 14px; gap: 12px; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ── Topbar ── -->
+  <header class="topbar">
+    <div class="logo">AQI<span>Intel</span> 🌫️</div>
+
+    <div class="search-wrap" id="searchWrap">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" id="searchInput" type="text"
+          placeholder="Search any city in India…"
+          autocomplete="off" spellcheck="false">
+        <span class="search-spinner" id="searchSpinner">⏳</span>
+        <button class="search-clear" id="searchClear" onclick="Search.clear()">✕</button>
+      </div>
+      <div class="suggestions" id="suggestions"></div>
+    </div>
+
+    <div class="city-chip" id="cityChip">📍 Bengaluru</div>
+    <div class="ts-label" id="tsLabel"></div>
+  </header>
+
+  <!-- ── Sidebar ── -->
+  <nav class="sidebar">
+    <div class="nav-section">Overview</div>
+    <div class="nav-item active" data-page="dashboard"  onclick="App.go('dashboard')"><span class="nav-icon">🏠</span>Dashboard</div>
+    <div class="nav-item"        data-page="heatmap"    onclick="App.go('heatmap')">  <span class="nav-icon">🗺️</span>Zone Heatmap</div>
+    <div class="nav-section">Forecasts</div>
+    <div class="nav-item"        data-page="forecast"   onclick="App.go('forecast')"> <span class="nav-icon">⏱️</span>12-Hour Forecast</div>
+    <div class="nav-item"        data-page="calendar"   onclick="App.go('calendar')"> <span class="nav-icon">📅</span>Air Calendar</div>
+    <div class="nav-section">Daily Life</div>
+    <div class="nav-item"        data-page="brief"      onclick="App.go('brief')">    <span class="nav-icon">☀️</span>Daily Brief</div>
+    <div class="nav-item"        data-page="activities" onclick="App.go('activities')"><span class="nav-icon">🏃</span>Activities</div>
+    <div class="nav-item"        data-page="school"     onclick="App.go('school')">   <span class="nav-icon">🏫</span>School Mode</div>
+    <div class="nav-section">🆕 Unique Features</div>
+    <div class="nav-item"        data-page="lungscore"   onclick="App.go('lungscore')"> <span class="nav-icon">🫁</span>Lung Score</div>
+    <div class="nav-item"        data-page="timemachine" onclick="App.go('timemachine')"><span class="nav-icon">🕰️</span>AQI Time Machine</div>
+    <div class="nav-item"        data-page="fingerprint" onclick="App.go('fingerprint')"><span class="nav-icon">🔬</span>Pollution DNA</div>
+    <div class="nav-item"        data-page="bodybattery" onclick="App.go('bodybattery')"><span class="nav-icon">⚡</span>Body Battery</div>
+    <div class="nav-item"        data-page="health"     onclick="App.go('health')">  <span class="nav-icon">🏥</span>Health Profile</div>
+    <div class="nav-section">Alerts & Community</div>
+    <div class="nav-item"        data-page="alerts"     onclick="App.go('alerts')">   <span class="nav-icon">🔔</span>Alert Setup</div>
+    <div class="nav-item"        data-page="community"  onclick="App.go('community')"><span class="nav-icon">🏆</span>Streaks & Badges</div>
+  </nav>
+
+  <!-- ── Main content ── -->
+  <main class="content">
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div id="db-alert"></div>
+      <div class="g2" style="margin-bottom:16px">
+        <div class="card" id="db-card">
+          <div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Current AQI</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div>
+              <div class="aqi-num" id="db-num" style="color:var(--text-muted)">—</div>
+              <div style="margin-top:4px"><span class="aqi-pill" id="db-pill" style="background:var(--text-muted)">Loading…</span></div>
+              <div id="db-station" style="margin-top:10px;font-size:.83rem;color:var(--text-muted)">Fetching data…</div>
+            </div>
+            <div style="text-align:right">
+              <div id="db-emoji" style="font-size:3rem">🌫️</div>
+              <span class="src-tag" id="db-src">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Weather Now</div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap">
+            <div style="text-align:center">
+              <div id="w-emoji" style="font-size:2.2rem">🌤️</div>
+              <div id="w-temp" style="font-family:var(--font-display);font-size:1.8rem;font-weight:900">—°C</div>
+              <div id="w-cond" style="font-size:.75rem;color:var(--text-muted)">—</div>
+            </div>
+            <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
+              <div><div style="font-size:.62rem;color:var(--text-muted);text-transform:uppercase">Humidity</div><div id="w-hum" style="font-weight:600">—</div></div>
+              <div><div style="font-size:.62rem;color:var(--text-muted);text-transform:uppercase">Wind</div><div id="w-wind" style="font-weight:600">—</div></div>
+              <div><div style="font-size:.62rem;color:var(--text-muted);text-transform:uppercase">Feels Like</div><div id="w-feels" style="font-weight:600">—</div></div>
+              <div><div style="font-size:.62rem;color:var(--text-muted);text-transform:uppercase">UV Index</div><div id="w-uv" style="font-weight:600">—</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-title">Pollutant Breakdown</div>
+        <div class="g4" id="db-poll">
+          <div class="skel" style="height:70px"></div><div class="skel" style="height:70px"></div>
+          <div class="skel" style="height:70px"></div><div class="skel" style="height:70px"></div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div class="card-title" style="margin:0">Today's Forecast</div>
+          <span onclick="App.go('forecast')" style="font-size:.8rem;color:var(--accent);cursor:pointer">See full →</span>
+        </div>
+        <div class="fc-bar" id="db-fcbar"><div class="skel" style="height:80px;width:100%"></div></div>
+        <div style="margin-top:10px;padding:10px;background:var(--bg);border-radius:8px;font-size:.85rem">
+          Best time outside: <strong id="db-best">Loading…</strong>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">India AQI Today</div>
+        <div id="db-cities" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:10px">
+          <div class="skel" style="height:75px"></div><div class="skel" style="height:75px"></div>
+          <div class="skel" style="height:75px"></div><div class="skel" style="height:75px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEATMAP -->
+    <div class="page" id="page-heatmap">
+      <div class="page-header"><div class="page-title">Zone Heatmap</div><div class="page-sub">AQI by neighbourhood — where to go, what to avoid.</div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px" id="zone-filters">
+        <button class="filter-btn active" onclick="App.filterZones('all',this)">All Zones</button>
+        <button class="filter-btn" onclick="App.filterZones('residential',this)">🏠 Residential</button>
+        <button class="filter-btn" onclick="App.filterZones('industrial',this)">🏭 Industrial</button>
+        <button class="filter-btn" onclick="App.filterZones('commercial',this)">🏬 Commercial</button>
+        <button class="filter-btn" onclick="App.filterZones('green',this)">🌿 Green</button>
+        <button class="filter-btn" onclick="App.filterZones('tech',this)">💻 Tech</button>
+      </div>
+      <div class="zone-grid" id="hm-zones"><div class="skel" style="height:140px"></div></div>
+      <div id="hm-insights" style="margin-top:14px"></div>
+    </div>
+
+    <!-- FORECAST -->
+    <div class="page" id="page-forecast">
+      <div class="page-header"><div class="page-title">12-Hour Forecast</div><div class="page-sub">Plan your day around the cleanest air windows.</div></div>
+      <div class="card" style="margin-bottom:16px" id="fc-best"><div class="skel" style="height:90px"></div></div>
+      <div class="card" style="margin-bottom:16px"><div class="card-title">Hourly AQI</div><div class="fc-bar" id="fc-bar"><div class="skel" style="height:90px;width:100%"></div></div></div>
+      <div class="card"><div class="card-title">AQI Trend</div><canvas id="fc-canvas" height="110"></canvas></div>
+    </div>
+
+    <!-- DAILY BRIEF -->
+    <div class="page" id="page-brief">
+      <div class="page-header"><div class="page-title">Daily Brief</div><div class="page-sub">Everything you need to live today well.</div></div>
+      <div id="brief-body"><div class="skel" style="height:200px"></div></div>
+    </div>
+
+    <!-- ACTIVITIES -->
+    <div class="page" id="page-activities">
+      <div class="page-header"><div class="page-title">Activity Intelligence</div><div class="page-sub">Is it a good day to run? Cycle? Walk the dog?</div></div>
+      <div id="act-body"><div class="skel" style="height:200px"></div></div>
+    </div>
+
+    <!-- CALENDAR -->
+    <div class="page" id="page-calendar">
+      <div class="page-header"><div class="page-title">Air Calendar</div><div class="page-sub">Which days had clean air this month?</div></div>
+      <div id="cal-body"><div class="skel" style="height:300px"></div></div>
+    </div>
+
+    <!-- SCHOOL -->
+    <div class="page" id="page-school">
+      <div class="page-header"><div class="page-title">🏫 School Mode</div><div class="page-sub">Safe for outdoor recess? What should parents know?</div></div>
+      <div id="school-body"><div class="skel" style="height:200px"></div></div>
+    </div>
+
+    <!-- ALERTS -->
+    <div class="page" id="page-alerts">
+      <div class="page-header"><div class="page-title">🔔 Alert Setup</div><div class="page-sub">Get notified when AQI crosses your threshold.</div></div>
+      <div id="alert-body"><div class="skel" style="height:200px"></div></div>
+    </div>
+
+    <!-- COMMUNITY -->
+    <div class="page" id="page-community">
+      <div class="page-header"><div class="page-title">🏆 Streaks & Badges</div><div class="page-sub">Daily check-ins, badges, and your air quality journey.</div></div>
+      <div id="comm-body"><div class="skel" style="height:200px"></div></div>
+    </div>
+
+
+    <!-- LUNG SCORE -->
+    <div class="page" id="page-lungscore">
+      <div class="page-header"><div class="page-title">🫁 Lung Score</div><div class="page-sub">Your personalised air quality exposure tracker — how clean was your air today?</div></div>
+      <div id="lung-body"><div class="skel" style="height:300px"></div></div>
+    </div>
+
+    <!-- AQI TIME MACHINE -->
+    <div class="page" id="page-timemachine">
+      <div class="page-header"><div class="page-title">🕰️ AQI Time Machine</div><div class="page-sub">Compare today's air to the same date last year. Is this Diwali worse than last year?</div></div>
+      <div id="tm-body"><div class="skel" style="height:200px"></div></div>
+    </div>
+
+    <!-- POLLUTION FINGERPRINT -->
+    <div class="page" id="page-fingerprint">
+      <div class="page-header"><div class="page-title">🔬 Pollution DNA</div><div class="page-sub">What's actually in your city's air — and why? No other app tells you this.</div></div>
+      <div id="fp-body"><div class="skel" style="height:300px"></div></div>
+    </div>
+
+    <!-- BODY BATTERY -->
+    <div class="page" id="page-bodybattery">
+      <div class="page-header"><div class="page-title">⚡ Body Battery Index</div><div class="page-sub">How much harder is outdoor exercise today due to pollution + heat + humidity?</div></div>
+      <div id="bb-body"><div class="skel" style="height:200px"></div></div>
+    </div>
+
+
+    <!-- HEALTH PROFILE -->
+    <div class="page" id="page-health">
+      <div class="page-header">
+        <div class="page-title">🏥 Health Profile</div>
+        <div class="page-sub">Personalised AQI advice for <em>your</em> health conditions — asthma, heart disease, pregnancy, seniors and more.</div>
+      </div>
+      <div id="health-body"><div class="skel" style="height:400px"></div></div>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

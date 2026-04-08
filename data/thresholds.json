@@ -1,0 +1,246 @@
+{
+  "naqi_categories": [
+    {
+      "min": 0,
+      "max": 50,
+      "category": "Good",
+      "color": "#00b050",
+      "hex_light": "#e8f8ee",
+      "emoji": "\ud83d\ude0a",
+      "health_impact": "Minimal impact",
+      "outdoor_safe": true,
+      "mask_needed": false,
+      "activity_ok": [
+        "running",
+        "cycling",
+        "walking",
+        "outdoor sports",
+        "dog walking"
+      ],
+      "brief": "Perfect air day. Go outside and enjoy!"
+    },
+    {
+      "min": 51,
+      "max": 100,
+      "category": "Satisfactory",
+      "color": "#92d050",
+      "hex_light": "#f2fae8",
+      "emoji": "\ud83d\ude42",
+      "health_impact": "Minor discomfort for sensitive individuals",
+      "outdoor_safe": true,
+      "mask_needed": false,
+      "activity_ok": [
+        "running",
+        "cycling",
+        "walking",
+        "outdoor sports",
+        "dog walking"
+      ],
+      "brief": "Air's decent. Sensitive folks may want to take it easy."
+    },
+    {
+      "min": 101,
+      "max": 200,
+      "category": "Moderate",
+      "color": "#ffbf00",
+      "hex_light": "#fff9e0",
+      "emoji": "\ud83d\ude10",
+      "health_impact": "Breathing discomfort on prolonged exposure",
+      "outdoor_safe": true,
+      "mask_needed": false,
+      "activity_ok": [
+        "walking",
+        "dog walking",
+        "light cycling"
+      ],
+      "brief": "Moderate air quality. Limit strenuous outdoor activity."
+    },
+    {
+      "min": 201,
+      "max": 300,
+      "category": "Poor",
+      "color": "#ff6600",
+      "hex_light": "#fff0e6",
+      "emoji": "\ud83d\ude37",
+      "health_impact": "Breathing discomfort to most people on prolonged exposure",
+      "outdoor_safe": false,
+      "mask_needed": true,
+      "activity_ok": [
+        "short walk with mask"
+      ],
+      "brief": "Poor air. Wear a mask outdoors. Avoid jogging or cycling today."
+    },
+    {
+      "min": 301,
+      "max": 400,
+      "category": "Very Poor",
+      "color": "#cc0000",
+      "hex_light": "#ffe6e6",
+      "emoji": "\ud83d\udea8",
+      "health_impact": "Respiratory illness on prolonged exposure",
+      "outdoor_safe": false,
+      "mask_needed": true,
+      "activity_ok": [],
+      "brief": "Very poor air. Stay indoors. N95 mask if you must go out."
+    },
+    {
+      "min": 401,
+      "max": 500,
+      "category": "Severe",
+      "color": "#660000",
+      "hex_light": "#ffd6d6",
+      "emoji": "\u2620\ufe0f",
+      "health_impact": "Affects healthy people; seriously impacts those with illness",
+      "outdoor_safe": false,
+      "mask_needed": true,
+      "activity_ok": [],
+      "brief": "Severe air quality. Do NOT go outside unless absolutely necessary."
+    }
+  ],
+  "pollutants": {
+    "pm25": {
+      "name": "PM2.5",
+      "unit": "\u00b5g/m\u00b3",
+      "good": 12,
+      "moderate": 35,
+      "poor": 55
+    },
+    "pm10": {
+      "name": "PM10",
+      "unit": "\u00b5g/m\u00b3",
+      "good": 54,
+      "moderate": 154,
+      "poor": 254
+    },
+    "no2": {
+      "name": "NO\u2082",
+      "unit": "\u00b5g/m\u00b3",
+      "good": 40,
+      "moderate": 80,
+      "poor": 180
+    },
+    "so2": {
+      "name": "SO\u2082",
+      "unit": "\u00b5g/m\u00b3",
+      "good": 40,
+      "moderate": 80,
+      "poor": 380
+    },
+    "co": {
+      "name": "CO",
+      "unit": "mg/m\u00b3",
+      "good": 1,
+      "moderate": 2,
+      "poor": 10
+    },
+    "o3": {
+      "name": "O\u2083",
+      "unit": "\u00b5g/m\u00b3",
+      "good": 50,
+      "moderate": 100,
+      "poor": 168
+    }
+  },
+  "activities": {
+    "running": {
+      "label": "Running",
+      "icon": "\ud83c\udfc3",
+      "max_aqi_safe": 100,
+      "max_aqi_caution": 150,
+      "reason_unsafe": "Heavy breathing increases PM2.5 intake by 4-6x during runs"
+    },
+    "cycling": {
+      "label": "Cycling",
+      "icon": "\ud83d\udeb4",
+      "max_aqi_safe": 100,
+      "max_aqi_caution": 150,
+      "reason_unsafe": "Cyclists inhale more pollutants near traffic-heavy routes"
+    },
+    "walking": {
+      "label": "Walking",
+      "icon": "\ud83d\udeb6",
+      "max_aqi_safe": 200,
+      "max_aqi_caution": 250,
+      "reason_unsafe": "Even moderate walks can cause irritation in severe AQI"
+    },
+    "dog_walking": {
+      "label": "Dog Walking",
+      "icon": "\ud83d\udc15",
+      "max_aqi_safe": 200,
+      "max_aqi_caution": 250,
+      "reason_unsafe": "Dogs breathe at ground level where pollution is denser"
+    },
+    "outdoor_sports": {
+      "label": "Outdoor Sports",
+      "icon": "\u26bd",
+      "max_aqi_safe": 100,
+      "max_aqi_caution": 150,
+      "reason_unsafe": "Intense exertion + poor air = serious respiratory strain"
+    },
+    "morning_yoga": {
+      "label": "Morning Yoga",
+      "icon": "\ud83e\uddd8",
+      "max_aqi_safe": 150,
+      "max_aqi_caution": 200,
+      "reason_unsafe": "Deep breathing exercises amplify pollutant intake"
+    }
+  },
+  "badges": [
+    {
+      "id": "masked-7",
+      "name": "Masked Up",
+      "desc": "Wore a mask 7 days straight",
+      "icon": "\ud83d\ude37",
+      "days_required": 7
+    },
+    {
+      "id": "stayed-in-red",
+      "name": "Red Day Survivor",
+      "desc": "Stayed indoors on a severe AQI day",
+      "icon": "\ud83c\udfe0",
+      "days_required": 1
+    },
+    {
+      "id": "streak-30",
+      "name": "Air Aware",
+      "desc": "Checked AQI 30 days in a row",
+      "icon": "\ud83d\udd25",
+      "days_required": 30
+    },
+    {
+      "id": "good-week",
+      "name": "Lucky Week",
+      "desc": "7 consecutive good air days in your city",
+      "icon": "\u2728",
+      "days_required": 7
+    },
+    {
+      "id": "early-bird",
+      "name": "Early Bird",
+      "desc": "Went out in the cleanest hour 5 times",
+      "icon": "\ud83c\udf05",
+      "days_required": 5
+    },
+    {
+      "id": "indoor-hero",
+      "name": "Indoor Hero",
+      "desc": "Suggested 10 indoor alternatives to friends",
+      "icon": "\ud83c\udfcb\ufe0f",
+      "days_required": 10
+    },
+    {
+      "id": "school-guard",
+      "name": "School Guard",
+      "desc": "Checked school mode 15 days",
+      "icon": "\ud83c\udfeb",
+      "days_required": 15
+    },
+    {
+      "id": "community-star",
+      "name": "Community Star",
+      "desc": "Reported local air quality 5 times",
+      "icon": "\u2b50",
+      "days_required": 5
+    }
+  ]
+}
